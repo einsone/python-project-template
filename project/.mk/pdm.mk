@@ -1,4 +1,4 @@
-PYPI := https://pypi.tuna.tsinghua.edu.cn/simple some-package
+PYPI := https://pypi.tuna.tsinghua.edu.cn/simple
 
 .PHONY: install-pdm  ## 使用 pip 安装 PDM
 install-pdm:
@@ -20,6 +20,12 @@ endif
 update-pdm: .pdm
 	@pdm self update
 
+.PHONY: config-pdm  ## 配置 PDM
+config-pdm: .pdm
+	pdm config --local pypi.url $(PYPI)
+	pdm config --local install.cache True
+	pdm config --local pypi.verify_ssl False
+
 .PHONY: create-venv  ## 创建项目内的虚拟环境（如已存在 .venv 目录则跳过）
 create-venv: .pdm
 	@if [ ! -d ".venv" ]; then \
@@ -34,3 +40,8 @@ create-venv: .pdm
 .PHONY: remove-venv  ## 删除项目内的虚拟环境
 remove-venv: .pdm
 	pdm venv remove -y in-project
+
+.PHONY: install-dev-dependencies
+install-dev-dependencies: config-pdm create-venv
+	pdm add -dG lint mypy ruff
+	pdm add -dG test pytest

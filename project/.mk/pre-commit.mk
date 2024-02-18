@@ -1,4 +1,4 @@
-PYPI := https://pypi.tuna.tsinghua.edu.cn/simple some-package
+PYPI := https://pypi.tuna.tsinghua.edu.cn/simple
 
 .PHONY: install-pre-commit  ## 使用 pip 安装 pre-commit
 install-pre-commit:

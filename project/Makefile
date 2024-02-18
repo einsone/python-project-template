@@ -5,8 +5,8 @@ SHELL := bash
 include $(CURRENT_DIR)/.mk/*.mk
 
 .PHONY: init  ## 项目初始化
-init:
-	echo "he"
+init: install-dev-dependencies pre-commit-install
+	@echo "项目初始化完成"
 
 .PHONY: help  ## 显示此帮助消息
 help:

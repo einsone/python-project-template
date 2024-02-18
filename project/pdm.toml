@@ -1,0 +1,6 @@
+[pypi]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = false
+
+[install]
+cache = true
