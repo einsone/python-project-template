@@ -1,0 +1,4 @@
+"""{{project_name}} package.
+"""
+
+print("Hello from {{python_package_import_name}}")
