@@ -27,7 +27,7 @@ config-pdm: .pdm
 	pdm config --local pypi.verify_ssl False
 
 .PHONY: create-venv  ## 创建项目内的虚拟环境（如已存在 .venv 目录则跳过）
-create-venv: .pdm
+create-venv: config-pdm
 	@if [ ! -d ".venv" ]; then \
 		echo "准备虚拟环境 .venv ..."; \
 		pdm venv create; \
@@ -38,10 +38,15 @@ create-venv: .pdm
 	fi
 
 .PHONY: remove-venv  ## 删除项目内的虚拟环境
-remove-venv: .pdm
+remove-venv: create-venv
 	pdm venv remove -y in-project
 
-.PHONY: install-dev-dependencies
-install-dev-dependencies: config-pdm create-venv
+.PHONY: install-dev-dependencies  ## 安装开发依赖
+install-dev-dependencies: create-venv
 	pdm add -dG lint mypy ruff
 	pdm add -dG test pytest
+
+.PHONY: format  ## 使用 ruff 格式化当前项目
+format: create-venv
+	pdm run ruff check --fix .
+	pdm run ruff format .
