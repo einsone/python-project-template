@@ -14,7 +14,7 @@ update-ruff: check-ruff
 config-ruff: check-ruff
 	@if [ ! -f ruff.toml ]; then \
 		echo "生成空 ruff.toml 文件 ..."; \
-		touch ruff.toml
+		touch ruff.toml; \
 	fi
 
 .PHONY: init-ruff  ## 初始化 ruff
