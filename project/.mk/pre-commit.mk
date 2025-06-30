@@ -1,29 +1,23 @@
-PYPI := https://pypi.tuna.tsinghua.edu.cn/simple
+.PHONY: check-pre-commit ## 检查 pre-commit 是否安装
+check-pre-commit:
+	@pre-commit --version || echo "install pre-commit by: `make install-pre-commit`"
 
-.PHONY: install-pre-commit  ## 使用 pip 安装 pre-commit
+.PHONY: install-pre-commit ## 安装 pre-commit
 install-pre-commit:
-ifeq (, $(shell which pre-commit))
-	@echo "安装 pre-commit ..."
-	pip install -i $(PYPI) pre-commit
-PRE_COMMIT_BIN=$(shell which pre-commit)
-else
-	@echo "pre-commit 已安装"
-PRE_COMMIT_BIN=$(shell which pre-commit)
-endif
+	@uv tool install pre-commit
 
-.PHONY: .pre-commit  ## 检查是否已安装 pre-commit
-.pre-commit:
-	@command -v pre-commit > /dev/null 2>&1 || { echo "pre-commit 未安装，请使用 'make install-pre-commit' 安装"; exit 1; }
-	@pre-commit -V
+.PHONY: update-pre-commit ## 升级 pre-commit
+update-pre-commit: check-pre-commit
+	@uv tool upgrade pre-commit
 
-.PHONY: pre-commit-install  ## 初始化 pre-commit
-pre-commit-install: .pre-commit
-	pre-commit install --install-hooks --overwrite
+.PHONY: init-pre-commit	## 初始化 pre-commit
+init-pre-commit: check-pre-commit
+	@pre-commit install --install-hooks --overwrite
 
-.PHONY: pre-commit-update-hooks  ## 升级 pre-commit hooks 至最新版
-pre-commit-update-hooks: pre-commit-install
-	pre-commit autoupdate
+.PHONY: update-hooks ## 升级 hooks 版本
+update-hooks:
+	@pre-commit autoupdate
 
-.PHONY: pre-commit  ## 运行 pre-commit
-pre-commit: pre-commit-install
-	pre-commit run --all-files
+.PHONY: pre-commit ## 运行 pre-commit
+pre-commit: check-pre-commit
+	pre-commit run --all-files --show-diff-on-failure

@@ -1,19 +1,15 @@
 [project]
-name = "{{ python_package_distribution_name }}"
-version = "0.1.0"
-description = "{{ project_description }}"
-authors = [
-    {name = "aeins", email = "einsone@outlook.com"},
-]
-dependencies = []
-requires-python = ">=3.11"
-readme = "README.md"
-license = {text = "MIT"}
+    authors      = [{ email = "einsone@outlook.com", name = "aeins" }]
+    dependencies = []
+    description  = "{{ project_description }}"
+    name         = "{{ python_package_distribution_name }}"
+    version      = "0.1.0"
+    license         = { text = "MIT" }
+    readme          = "README.md"
+    requires-python = ">=3.11"
+[dependency-groups]
+    dev             = ["pre-commit", "ruff"]
 
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
-
-[tool.pdm]
-distribution = true
+    build-backend = "nuitka.distutils.Build"
+    requires      = ["nuitka>=1.7.8", "setuptools>=61", "toml", "versioningit", "wheel"]
