@@ -1,14 +1,14 @@
 [project]
-    authors      = [{ email = "einsone@outlook.com", name = "aeins" }]
-    dependencies = []
-    description  = "{{ project_description }}"
-    name         = "{{ python_package_distribution_name }}"
-    version      = "0.1.0"
+    authors         = [{ email = "einsone@outlook.com", name = "aeins" }]
+    dependencies    = []
+    description     = "{{ project_description }}"
     license         = { text = "MIT" }
+    name            = "{{ python_package_distribution_name }}"
     readme          = "README.md"
     requires-python = ">=3.11"
+    version         = "0.1.0"
 [dependency-groups]
-    dev             = ["pre-commit", "ruff"]
+    dev = ["pre-commit", "ruff"]
 
 [build-system]
     build-backend = "nuitka.distutils.Build"

@@ -5,6 +5,7 @@ _templates_suffix: .jinja
 _tasks:
   - "git init"
   - "make init"
+  - "git add ."
 
 # PROMPT --------------------------------
 project_name:
