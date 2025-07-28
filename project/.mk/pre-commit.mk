@@ -14,10 +14,6 @@ update-pre-commit: check-pre-commit
 init-pre-commit: check-pre-commit
 	@pre-commit install --install-hooks --overwrite
 
-.PHONY: update-hooks ## 升级 hooks 版本
-update-hooks:
+.PHONY: update-hooks ## 升级 pre-commit hooks
+update-pre-commit-hooks:
 	@pre-commit autoupdate
-
-.PHONY: pre-commit ## 运行 pre-commit
-pre-commit: check-pre-commit
-	pre-commit run --all-files --show-diff-on-failure

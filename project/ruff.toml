@@ -5,11 +5,12 @@ line-length    = 120
 src            = ["src"]
 
 [format]
-    docstring-code-format     = true
-    indent-style              = "space"
-    line-ending               = "lf"
-    quote-style               = "double"
-    skip-magic-trailing-comma = true
+    docstring-code-format      = true
+    docstring-code-line-length = "dynamic"
+    indent-style               = "space"
+    line-ending                = "lf"
+    quote-style                = "double"
+    skip-magic-trailing-comma  = true
 
 [lint]
     dummy-variable-rgx = "^_$"

@@ -24,7 +24,7 @@ uninstall-uv:
 .PHONY: config-uv ## 配置 uv
 config-uv:
 	@if [ ! -f uv.toml ]; then \
-		echo "Generate uv.toml ..."; \
+		echo "生成 uv.toml 文件.."; \
 		echo 'index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"' >> uv.toml; \
 	fi
 
