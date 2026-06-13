@@ -1,0 +1,8 @@
+[run]
+    branch = true
+    source = ["src"]
+
+[report]
+    exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]
+    fail_under   = 80
+    show_missing = true

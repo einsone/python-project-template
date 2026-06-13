@@ -1,0 +1,87 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+# prek 内置的常用钩子（无需克隆 repo，速度更快）
+[[repos]]
+    repo = "builtin"
+    hooks = [
+        { id = "trailing-whitespace" },
+        { id = "end-of-file-fixer" },
+        { id = "mixed-line-ending" },
+        { id = "check-added-large-files" },
+        { id = "check-merge-conflict" },
+        { id = "check-json" },
+        { id = "check-toml" },
+        { id = "check-xml" },
+        { id = "check-yaml" },
+        { id = "detect-private-key" },
+    ]
+
+# 本地钩子：Python 工具来自 dev 依赖经 `uv run` 调用（版本由 uv.lock 管理）；
+# markdownlint 为 Node 工具，由 prek 以 language=node 自动安装隔离环境。
+# hooks 顺序即执行顺序：先格式修复，再静态检查，最后类型检查与测试
+[[repos]]
+    repo = "local"
+
+[[repos.hooks]]
+    id             = "ruff-check"
+    name           = "ruff check"
+    entry          = "uv run ruff check --fix --force-exclude"
+    language       = "system"
+    files          = '\.pyi?$'
+    require_serial = true
+
+[[repos.hooks]]
+    id             = "ruff-format"
+    name           = "ruff format"
+    entry          = "uv run ruff format --force-exclude"
+    language       = "system"
+    files          = '\.pyi?$'
+    require_serial = true
+
+[[repos.hooks]]
+    id       = "taplo-format"
+    name     = "taplo format"
+    entry    = "uv run taplo format"
+    language = "system"
+    files    = '\.toml$'
+
+[[repos.hooks]]
+    id       = "taplo-lint"
+    name     = "taplo lint"
+    entry    = "uv run taplo lint --no-schema"
+    language = "system"
+    files    = '\.toml$'
+
+[[repos.hooks]]
+    id       = "codespell"
+    name     = "codespell"
+    entry    = "uv run codespell"
+    language = "system"
+
+[[repos.hooks]]
+    id                      = "markdownlint"
+    name                    = "markdownlint"
+    entry                   = "markdownlint-cli2 --fix"
+    language                = "node"
+    additional_dependencies = ["markdownlint-cli2"]
+    files                   = '\.md$'
+
+[[repos.hooks]]
+    id             = "ty"
+    name           = "ty"
+    entry          = "uv run ty check"
+    language       = "system"
+    pass_filenames = false
+    always_run     = true
+    require_serial = true
+
+[[repos.hooks]]
+    id             = "pytest"
+    name           = "pytest"
+    entry          = "uv run pytest"
+    language       = "system"
+    pass_filenames = false
+    always_run     = true
+    stages         = ["pre-push"]

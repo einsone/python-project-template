@@ -4,7 +4,8 @@ _subdirectory: project
 _templates_suffix: .jinja
 _tasks:
   - "git init"
-  - "make init"
+  - "make sync"
+  - "make hooks"
   - "git add ."
 
 # PROMPT --------------------------------
@@ -15,6 +16,26 @@ project_name:
 project_description:
   type: str
   help: 项目描述
+
+author_name:
+  type: str
+  help: 作者名称
+  default: "aeins"
+
+author_email:
+  type: str
+  help: 作者邮箱
+  default: "einsone@outlook.com"
+
+year:
+  type: str
+  help: 版权年份 (LICENSE)
+  default: "2026"
+
+project_url:
+  type: str
+  help: 项目仓库地址 (homepage / repository)
+  default: "https://github.com/einsone/{{ project_name|lower|replace('_', '-')|replace(' ', '-') }}"
 
 python_package_distribution_name:
   type: str

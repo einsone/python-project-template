@@ -10,7 +10,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 安装依赖
 uv tool install copier
-uv tool install pre-commit ruff
+uv tool install prek ruff ty taplo
 ```
 
 ### 2. 初始化项目
@@ -23,4 +23,4 @@ copier copy --trust https://github.com/einsone/python-project-template.git path/
 
 - [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 - [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
-- <https://pre-commit.com/>
+- <https://prek.j178.dev/>

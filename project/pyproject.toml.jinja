@@ -1,15 +1,36 @@
 [project]
-    authors         = [{ email = "einsone@outlook.com", name = "aeins" }]
-    dependencies    = []
-    description     = "{{ project_description }}"
-    license         = { text = "MIT" }
-    name            = "{{ python_package_distribution_name }}"
-    readme          = "README.md"
+    name = "{{ python_package_distribution_name }}"
+    version = "0.1.0"
+    description = "{{ project_description }}"
+    readme = "README.md"
+    authors = [{ name = "{{ author_name }}", email = "{{ author_email }}" }]
+    license = "MIT"
+    license-files = ["LICENSE"]
     requires-python = ">=3.11"
-    version         = "0.1.0"
+    dependencies = []
+    keywords = []
+    classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Typing :: Typed",
+    ]
+
+[project.urls]
+    Homepage   = "{{ project_url }}"
+    Repository = "{{ project_url }}"
+    Issues     = "{{ project_url }}/issues"
+
 [dependency-groups]
-    dev = ["pre-commit", "ruff"]
+    dev = ["codespell", "prek", "pytest", "pytest-cov", "ruff", "taplo", "ty"]
 
 [build-system]
-    build-backend = "nuitka.distutils.Build"
-    requires      = ["nuitka>=1.7.8", "setuptools>=61", "toml", "versioningit", "wheel"]
+    build-backend = "hatchling.build"
+    requires      = ["hatchling"]
+
+[tool.hatch.build.targets.wheel]
+    packages = ["src/{{ python_package_import_name }}"]

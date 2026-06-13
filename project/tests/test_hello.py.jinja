@@ -1,0 +1,13 @@
+"""Tests for {{ python_package_import_name }}."""
+
+from {{ python_package_import_name }} import hello
+
+
+def test_hello_default() -> None:
+    """hello() greets the world by default."""
+    assert hello() == "Hello, world!"
+
+
+def test_hello_name() -> None:
+    """hello(name) greets the given name."""
+    assert hello("aeins") == "Hello, aeins!"

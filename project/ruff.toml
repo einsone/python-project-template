@@ -1,8 +1,7 @@
-extend-exclude = [".venv"]
-force-exclude  = true
-indent-width   = 4
-line-length    = 120
-src            = ["src"]
+force-exclude = true
+indent-width  = 4
+line-length   = 180
+src           = ["src"]
 
 [format]
     docstring-code-format      = true
@@ -10,32 +9,46 @@ src            = ["src"]
     indent-style               = "space"
     line-ending                = "lf"
     quote-style                = "double"
-    skip-magic-trailing-comma  = true
+    skip-magic-trailing-comma  = false
 
 [lint]
     dummy-variable-rgx = "^_$"
-    ignore = ["COM812", "COM819", "D206", "D300", "E111", "E114", "E117", "ISC001", "ISC002", "Q000", "Q001", "Q002", "Q003", "W191"]
+    ignore = [
+        "D104", # undocumented-public-package —— 不强制 __init__.py（包）写 docstring
+        "D107", # undocumented-public-init —— 不强制 __init__ 方法写 docstring
+        "D206", # docstring-tab-indentation —— 缩进交由 formatter 处理
+        "D300", # triple-single-quotes —— 引号交由 formatter 处理
+        "E111", # indentation-with-invalid-multiple —— 缩进交由 formatter 处理
+        "E114", # indentation-with-invalid-multiple-comment —— 缩进交由 formatter 处理
+        "E117", # over-indented —— 缩进交由 formatter 处理
+        "W191", # tab-indentation —— 缩进交由 formatter 处理
+    ]
     select = [
-        "B",    # flake8-bugbear
-        "C4",   # flake8-comprehensions
-        "C90",  # mccabe
-        "D",    # pydocstyle
-        "E",    # pycodestyle
-        "F",    # Pyflakes
-        "FURB", # refurb
-        "G",    # flake8-logging-format
-        "I",    # isort
-        "INP",  # flake8-no-pep420
-        "N",    # pep8-naming
-        "PGH",  # pygrep-hooks
-        "PTH",  # flake8-use-pathlib
-        "Q",    # flake8-quotes
-        "RUF",  # Ruff-specific rules
-        "S",    # flake8-bandit
-        "SIM",  # flake8-simplify
-        "T20",  # flake8-print
-        "UP",   # pyupgrade
-        "W",    # pycodestyle
+        "A",    # flake8-builtins —— 禁止遮蔽 Python 内建名（如 id、type、list）
+        "B",    # flake8-bugbear —— 常见 bug 与设计缺陷（如可变默认参数）
+        "C4",   # flake8-comprehensions —— 推导式写法优化
+        "C90",  # mccabe —— 圈复杂度检查
+        "D",    # pydocstyle —— 文档字符串规范
+        "E",    # pycodestyle errors —— PEP 8 代码风格错误
+        "F",    # Pyflakes —— 逻辑错误（未用导入、未定义名等）
+        "FURB", # refurb —— 现代化、更地道的写法
+        "G",    # flake8-logging-format —— 日志格式化规范
+        "I",    # isort —— import 排序
+        "INP",  # flake8-no-pep420 —— 禁止隐式命名空间包（缺 __init__.py）
+        "LOG",  # flake8-logging —— logging 模块使用陷阱
+        "N",    # pep8-naming —— PEP 8 命名规范
+        "PGH",  # pygrep-hooks —— 杂项检查（如禁止裸 type: ignore）
+        "PIE",  # flake8-pie —— 杂项代码简化
+        "PT",   # flake8-pytest-style —— pytest 测试写法规范
+        "PTH",  # flake8-use-pathlib —— 优先使用 pathlib 而非 os.path
+        "RUF",  # Ruff-specific rules —— Ruff 自有规则
+        "S",    # flake8-bandit —— 安全漏洞检查
+        "SIM",  # flake8-simplify —— 代码可简化之处
+        "T10",  # flake8-debugger —— 禁止遗留调试器语句（breakpoint、pdb）
+        "T20",  # flake8-print —— 禁止 print/pprint（库代码不应有）
+        "TC",   # flake8-type-checking —— 仅类型用的 import 移入 TYPE_CHECKING
+        "UP",   # pyupgrade —— 升级到更新的 Python 语法
+        "W",    # pycodestyle warnings —— PEP 8 代码风格警告
     ]
 
 [lint.pydocstyle]
@@ -43,3 +56,9 @@ src            = ["src"]
 
 [lint.mccabe]
     max-complexity = 10
+
+[lint.per-file-ignores]
+    "tests/**" = [
+        "D",    # pydocstyle —— 测试代码无需文档字符串
+        "S101", # assert —— 测试中允许使用 assert
+    ]

@@ -1,8 +1,10 @@
-# pip 清华源
-index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
-
 # 禁止自动下载 Python
 python-downloads = "manual"
 
 # 始终使用 uv 管理的 Python
 python-preference = "only-managed"
+
+# pip 清华源
+[[index]]
+    url     = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+    default = true
