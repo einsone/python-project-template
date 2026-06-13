@@ -1,1 +1,41 @@
 # {{ project_name }}
+
+{{ project_description }}
+
+## 安装
+
+```bash
+pip install {{ python_package_distribution_name }}
+```
+
+## 用法
+
+```python
+from {{ python_package_import_name }} import hello
+
+print(hello("world"))
+```
+
+## 开发
+
+依赖 [uv](https://docs.astral.sh/uv/)。克隆仓库后：
+
+```bash
+make sync    # 创建虚拟环境并安装依赖
+make hooks   # 安装 Git 钩子
+```
+
+常用命令：
+
+| 命令 | 说明 |
+| --- | --- |
+| `make check` | 运行全部钩子（提交前必跑） |
+| `make lint` | 代码检查（ruff） |
+| `make format` | 格式化代码（ruff + taplo） |
+| `make typecheck` | 类型检查（ty） |
+| `make test` | 运行测试（pytest） |
+| `make test-cov` | 运行测试并生成覆盖率报告 |
+
+## 许可证
+
+[MIT](LICENSE)
