@@ -1,0 +1,37 @@
+# {{ project_name }}
+
+本文件为 Claude Code（及其他 AI 助手）在本项目中工作的指引。
+
+## 交流语言
+
+- 始终使用**中文**回答。
+
+## 修改文件后必须校验
+
+每次修改任何文件后，**必须**运行校验以确保符合项目规范：
+
+```bash
+make check
+```
+
+`make check` 等价于 `uv run prek run --all-files`，会运行全部钩子（ruff 检查与格式化、taplo、codespell、markdownlint、ty 类型检查）。
+
+要求：
+
+- 修改后运行 `make check`，**确保全部通过**后才算完成。
+- 若钩子自动修改了文件（如 ruff/taplo 格式化），需重新运行直至无改动且全部通过。
+- 提交前确保 `make check` 干净通过——这与 CI 的门禁一致。
+
+## 常用命令
+
+| 命令 | 说明 |
+| --- | --- |
+| `make sync` | 创建虚拟环境并安装依赖 |
+| `make check` | 运行全部钩子（提交前必跑） |
+| `make lint` | 代码检查（ruff） |
+| `make format` | 格式化代码（ruff + taplo） |
+| `make typecheck` | 类型检查（ty） |
+| `make test` | 运行测试（pytest） |
+| `make test-cov` | 运行测试并生成覆盖率报告 |
+
+注意：`pytest` 在 `pre-push` 阶段运行，不在 `make check` 中；改动代码后请另行 `make test` 确认测试通过。
