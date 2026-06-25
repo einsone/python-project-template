@@ -14,14 +14,18 @@ src           = ["src"]
 [lint]
     dummy-variable-rgx = "^_$"
     ignore = [
-        "D104", # undocumented-public-package —— 不强制 __init__.py（包）写 docstring
-        "D107", # undocumented-public-init —— 不强制 __init__ 方法写 docstring
-        "D206", # docstring-tab-indentation —— 缩进交由 formatter 处理
-        "D300", # triple-single-quotes —— 引号交由 formatter 处理
-        "E111", # indentation-with-invalid-multiple —— 缩进交由 formatter 处理
-        "E114", # indentation-with-invalid-multiple-comment —— 缩进交由 formatter 处理
-        "E117", # over-indented —— 缩进交由 formatter 处理
-        "W191", # tab-indentation —— 缩进交由 formatter 处理
+        "D104",   # undocumented-public-package —— 不强制 __init__.py（包）写 docstring
+        "D107",   # undocumented-public-init —— 不强制 __init__ 方法写 docstring
+        "D206",   # docstring-tab-indentation —— 缩进交由 formatter 处理
+        "D300",   # triple-single-quotes —— 引号交由 formatter 处理
+        "D415",   # ends-in-punctuation —— 中文句号「。」不被识别为合法结尾标点，本项目文档用中文
+        "E111",   # indentation-with-invalid-multiple —— 缩进交由 formatter 处理
+        "E114",   # indentation-with-invalid-multiple-comment —— 缩进交由 formatter 处理
+        "E117",   # over-indented —— 缩进交由 formatter 处理
+        "RUF001", # ambiguous-unicode-string —— 中文全角标点（，（）等）属正常用字，本项目文档用中文
+        "RUF002", # ambiguous-unicode-docstring —— 同上，docstring 中文标点
+        "RUF003", # ambiguous-unicode-comment —— 同上，注释中文标点
+        "W191",   # tab-indentation —— 缩进交由 formatter 处理
     ]
     select = [
         "A",    # flake8-builtins —— 禁止遮蔽 Python 内建名（如 id、type、list）
