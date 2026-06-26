@@ -21,6 +21,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+      - run: uv python install 3.13
       - run: uv sync --frozen
       - name: Lint & type check
         run: uv run prek run --all-files --show-diff-on-failure
@@ -37,7 +38,9 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-          python-version: ${{ matrix.python-version }}
+      - run: uv python install ${{ matrix.python-version }}
       - run: uv sync --frozen
+        env:
+          UV_PYTHON: ${{ matrix.python-version }}
       - name: Run tests
         run: uv run pytest
